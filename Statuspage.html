@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Website Status Checker</title>
+  <script>
+    function checkStatus() {
+      // Define the URLs of the websites you want to check
+      var urls = [
+        "https://status.aircall.io/",
+        "https://status.bringg.com/",
+        "https://www.githubstatus.com/"
+      ];
+
+      // Loop through the URLs and send HTTP requests to check their statuses
+      urls.forEach(function(url) {
+        fetch(url)
+          .then(function(response) {
+            // Check the response status and update the HTML accordingly
+            var statusText = response.ok ? "Operational" : "Down";
+            document.getElementById(url).innerText = statusText;
+          })
+          .catch(function(error) {
+            // Handle any errors that occur during the request
+            console.log("Error checking status for " + url + ": " + error);
+          });
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Website Status Checker</h1>
+  <button onclick="checkStatus()">Check Status</button>
+  <ul>
+    <li>Aircall: <span id="https://status.aircall.io/"></span></li>
+    <li>Bringg: <span id="https://status.bringg.com/"></span></li>
+    <li>Github: <span id="https://www.githubstatus.com/"></span></li>
+  </ul>
+</body>
+</html>
